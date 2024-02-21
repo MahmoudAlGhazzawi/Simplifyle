@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.css';
+import find from 'lang-codes'
 
 const Settings = () => {
 
-    const [isChecked, setIsChecked] = useState(true);
+    const [isChecked, setIsChecked] = React.useState(true);
 
     const handleToggle = () => {
         setIsChecked(!isChecked);
     };
+
+    console.log(find())
 
     return (
         <div className="container">
@@ -18,9 +21,9 @@ const Settings = () => {
                 <p><i className="bi bi-globe"></i></p>
                 <select name="languages" id="languages">
                     <option value="">Choose a language</option>
-                    <option value="L1">Language 1</option>
-                    <option value="L2">Language 2</option>
-                    <option value="L3">Language 3</option>
+                    {find().map((obj) => {
+                        return <option value={obj.name} key={obj.name} >{obj.name}</option>
+                    })}
                 </select>
             </div>
 
