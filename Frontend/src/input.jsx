@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './styles.css'
-
+import { Link } from 'react-router-dom';
 
 
 const Input = () => {
