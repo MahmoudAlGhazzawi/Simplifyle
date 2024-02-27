@@ -10,7 +10,7 @@ const App = () => {
     <React.StrictMode>
       <Header />
       {/* <Start /> */}
-      {/* <Input /> */}
+      <Input />
       <Settings />
     </React.StrictMode>
   );
