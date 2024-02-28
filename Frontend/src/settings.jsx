@@ -21,7 +21,7 @@ const Settings = ({ selectedImage, selectedPdf }) => {
 
             <div className="picture-container">
                 {selectedImage && <img src={selectedImage} alt="Selected" />}
-                {selectedPdf && <embed src={selectedPdf} type="application/pdf" />}
+                {selectedPdf && <embed src={selectedPdf} type="application/pdf" alt="Upload" />}
             </div>
 
             <div className="container-below">

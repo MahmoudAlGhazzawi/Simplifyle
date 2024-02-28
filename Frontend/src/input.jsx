@@ -5,31 +5,22 @@ import './styles.css'
 
 
 const Input = ({ onImageSelect, onPdfSelect }) => {
+
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
 
         reader.onload = (e) => {
             const result = e.target.result;
-            // Call the onImageSelect callback with the selected image
-            onImageSelect(result);
+            if (file.type.includes('image')) {
+                onImageSelect(result);
+            } else {
+                onPdfSelect(result);
+            }
         };
-
         reader.readAsDataURL(file);
     };
 
-    const handlePdfChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = (e) => {
-            const result = e.target.result;
-            // Call the onPdfSelect callback with the selected PDF
-            onPdfSelect(result);
-        };
-
-        reader.readAsDataURL(file);
-    };
 
 
     return (
@@ -45,7 +36,7 @@ const Input = ({ onImageSelect, onPdfSelect }) => {
 
             <label htmlFor="upload-button" className="input-button-label">
                 <i className="bi bi-upload"></i>Upload file
-                <input className="input-button" type="file" accept="image/*, application/pdf" id="upload-button" onChange={handlePdfChange} />
+                <input className="input-button" type="file" accept="image/*, application/pdf" id="upload-button" onChange={handleImageChange} />
             </label>
 
         </div>
