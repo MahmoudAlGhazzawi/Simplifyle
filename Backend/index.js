@@ -4,6 +4,18 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const app = express();
+const OpenAI = require('openai');
+require('dotenv').config();
+
+
+
+const openAIApiKey = process.env.OPENAI_API_KEY;
+const organizationID = process.env.ORGANIZATION_ID;
+
+const openai = new OpenAI({
+  apikey: openAIApiKey,
+  organization: organizationID
+});
 
 // Falls Upload Ordner nicht existiert
 var dir = './uploads';
@@ -39,7 +51,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/extractTextFromImage',  upload.single('file'), async (req, res) => {
-    console.log(req.file.path); 
+    //console.log(req.file.path); 
     const text = await tesseractConverter(req.file.path);
 
     // delete File after processing it
@@ -50,7 +62,12 @@ app.post('/extractTextFromImage',  upload.single('file'), async (req, res) => {
         }
         // else File is removed
       }) 
-    res.render('index', {data:text})
+
+    // openAI Teil
+    const lang = 'Russisch'
+    var uebersetzterText = await translateInput(text, lang);
+
+    res.render('index', {data:uebersetzterText})
 })
 
 app.listen(3000, () => {
@@ -61,7 +78,23 @@ const tesseractConverter  = async (image) => {
   const worker = await tesseract.createWorker('eng');
   const ret = await worker.recognize(image);
   const text = ret.data.text;
-  console.log(text);-
+  //console.log(text);
   await worker.terminate();
   return text;
 };
+
+async function translateInput(text, lang) {
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {"role": "system", "content": `Du übersetzt bürokratische briefe auf eine beiliebe Sprache, was der User dir schreiben wird.
+        Es sllen keine Daten wie (Absender, Empänger, Fußzeile) übersetzt werden sondern nur die Ihalt und Betreff.`},
+        { "role": "user", "content": `Übersetzte mir diesen Brief auf ${lang}:
+                                      ${text}`}],
+      model: "gpt-3.5-turbo",
+      //max_tokens:200,
+    });
+  
+    var uebersetzterText = completion.choices[0].message.content;
+    //console.log(uebersetzterText);
+    return uebersetzterText;
+  }
