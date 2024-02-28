@@ -226,11 +226,16 @@ select {
 
 .picture-container {
     width: 310px;
-    height: 416px;
+    min-height: 416px;
     margin-top: 40px;
     background-color: #EAEAEC;
     border: 2px solid #3D5A80;
     border-radius: 6px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 100%;
+    max-height: 416px;
 }
 
 .container-below {

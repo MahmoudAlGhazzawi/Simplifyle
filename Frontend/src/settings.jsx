@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import find from 'lang-codes'
 
-const Settings = ({ selectedImage }) => {
+const Settings = ({ selectedImage, selectedPdf }) => {
 
     const [isChecked, setIsChecked] = React.useState(true);
 
@@ -21,6 +21,7 @@ const Settings = ({ selectedImage }) => {
 
             <div className="picture-container">
                 {selectedImage && <img src={selectedImage} alt="Selected" />}
+                {selectedPdf && <embed src={selectedPdf} type="application/pdf" />}
             </div>
 
             <div className="container-below">
