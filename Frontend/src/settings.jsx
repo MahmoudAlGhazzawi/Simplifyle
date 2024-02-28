@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import find from 'lang-codes'
 
-const Settings = () => {
+const Settings = ({ selectedImage }) => {
 
     const [isChecked, setIsChecked] = React.useState(true);
 
@@ -19,7 +19,9 @@ const Settings = () => {
     return (
         <div className="container">
 
-            <div className="picture-container"></div>
+            <div className="picture-container">
+                {selectedImage && <img src={selectedImage} alt="Selected" />}
+            </div>
 
             <div className="container-below">
                 <span className="page-counter">Page1/1</span>

@@ -6,14 +6,19 @@ import Input from './input.jsx'
 import Settings from './settings.jsx'
 
 const App = () => {
+  const [selectedImage, setSelectedImage] = React.useState(null);
+
+  const handleImageSelect = (imageData) => {
+    setSelectedImage(imageData);
+  };
+
   return (
     <React.StrictMode>
       <Header />
-      {/* <Start /> */}
-      <Input />
-      <Settings />
+      <Input onImageSelect={handleImageSelect} />
+      <Settings selectedImage={selectedImage} />
     </React.StrictMode>
   );
-}
+};
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
