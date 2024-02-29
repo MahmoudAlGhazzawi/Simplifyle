@@ -20,8 +20,9 @@ const App = () => {
   return (
     <React.StrictMode>
       <Header />
+      {/* <Start /> */}
       <Input onImageSelect={handleImageSelect} onPdfSelect={handlePdfSelect} />
-      <Settings selectedImage={selectedImage} selectedPdf={selectedPdf} />
+      <Settings selectedImage={selectedImage} setSelectedImage={setSelectedImage} selectedPdf={selectedPdf} setSelectedPdf={setSelectedPdf} />
     </React.StrictMode>
   );
 };

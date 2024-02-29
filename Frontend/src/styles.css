@@ -238,12 +238,17 @@ select {
     max-height: 416px;
 }
 
+/* embed {
+    width: auto;
+    height: 100%;
+} */
+
 .picture-container embed {
-    overflow: auto;
     display: flex;
     flex-direction: column;
     flex: 100%;
 }
+
 
 
 .container-below {
@@ -264,6 +269,7 @@ select {
     font-size: 14px;
     font-weight: 500;
     color: #EE6C4D;
+    cursor: pointer;
 }
 
 .redo i {

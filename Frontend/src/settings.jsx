@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import find from 'lang-codes'
 
-const Settings = ({ selectedImage, selectedPdf }) => {
+const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf }) => {
 
     const [isChecked, setIsChecked] = React.useState(true);
 
@@ -16,17 +16,22 @@ const Settings = ({ selectedImage, selectedPdf }) => {
         setSelectedLanguage(event.target.value);
     };
 
+    const handleRedoUpload = () => {
+        setSelectedImage(null);
+        setSelectedPdf(null);
+    };
+
     return (
         <div className="container">
 
             <div className="picture-container">
                 {selectedImage && <img src={selectedImage} alt="Selected" />}
-                {selectedPdf && <embed src={selectedPdf} type="application/pdf" alt="Upload" />}
+                {selectedPdf && <embed src={`${selectedPdf} #toolbar=0`} type="application/pdf" alt="Upload" />}
             </div>
 
             <div className="container-below">
                 <span className="page-counter">Page1/1</span>
-                <span className="redo"><i className="bi bi-trash"></i>Redo upload</span>
+                <span className="redo" onClick={handleRedoUpload}><i className="bi bi-trash"></i>Redo upload</span>
             </div>
 
             <div className="select-container">

@@ -39,6 +39,7 @@ const Input = ({ onImageSelect, onPdfSelect }) => {
                 <input className="input-button" type="file" accept="image/*, application/pdf" id="upload-button" onChange={handleImageChange} />
             </label>
 
+
         </div>
     );
 };
