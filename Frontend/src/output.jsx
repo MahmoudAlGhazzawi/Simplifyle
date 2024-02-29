@@ -15,6 +15,7 @@ const Output = () => {
             <h3>Copy the text to your clipboard or download pdf file</h3>
 
             <div className="output-container">
+                { }
             </div>
 
             <button className="button">
@@ -25,6 +26,7 @@ const Output = () => {
                 <i class="bi bi-download"></i>Download pdf
             </button>
 
+            <p><i class="bi bi-arrow-clockwise"></i>Translate more documents</p>
 
         </div>
     );

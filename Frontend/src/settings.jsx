@@ -44,10 +44,10 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
                 </select>
             </div>
 
-            <div className="toggle-container" onClick={handleToggle}>
+            <div className="toggle-container" onClick={handleToggle} >
                 <p>Simplify language</p>
-                <label className="switch">
-                    <input type="checkbox" checked={isChecked} onChange={() => { }} />
+                <label htmlFor="toggle-switch" className="switch">
+                    <input type="checkbox" id="toggle-switch" checked={isChecked} onChange={() => { }} />
                     <span className="slider"></span>
                 </label>
             </div>

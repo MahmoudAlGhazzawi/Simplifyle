@@ -22,9 +22,9 @@ const App = () => {
     <React.StrictMode>
       <Header />
       {/* <Start /> */}
-      {/* <Input onImageSelect={handleImageSelect} onPdfSelect={handlePdfSelect} /> */}
-      {/* <Settings selectedImage={selectedImage} setSelectedImage={setSelectedImage} selectedPdf={selectedPdf} setSelectedPdf={setSelectedPdf} /> */}
-      <Output />
+      <Input onImageSelect={handleImageSelect} onPdfSelect={handlePdfSelect} />
+      <Settings selectedImage={selectedImage} setSelectedImage={setSelectedImage} selectedPdf={selectedPdf} setSelectedPdf={setSelectedPdf} />
+      {/* <Output /> */}
     </React.StrictMode>
   );
 };
