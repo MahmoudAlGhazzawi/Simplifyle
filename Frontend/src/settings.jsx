@@ -52,7 +52,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
                 </label>
             </div>
 
-            <button><i className="bi bi-caret-right-square"></i>Translate</button>
+            <button className="button-translate"><i className="bi bi-caret-right-square"></i>Translate</button>
         </div>
     );
 }

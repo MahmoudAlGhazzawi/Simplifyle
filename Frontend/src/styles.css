@@ -38,20 +38,18 @@ h1 {
 }
 
 h2 {
-    margin-top: 40px;
+    margin-top: 20px;
     font-weight: 500;
     font-size: 18px;
     color: #293241;
 }
 
 h3 {
-    margin-top: 40px;
+    margin-top: 20px;
     font-weight: 500;
     font-size: 14px;
     color: #3D5A80;
 }
-
-/* Here BEGINS the input-button Styles: */
 
 
 .input-button[type="file"] {
@@ -65,9 +63,7 @@ h3 {
     border: 0;
 }
 
-/* Style for the file input label to mimic button appearance */
 .input-button-label {
-    /* Button styles */
     width: 180px;
     height: 46px;
     border: 0;
@@ -86,7 +82,6 @@ h3 {
     justify-content: center;
 }
 
-/* Optionally, hide file input label text */
 .input-button-label span {
     display: none;
 }
@@ -94,9 +89,6 @@ h3 {
 .input-button-label i {
     margin-right: 10px;
 }
-
-
-/* Here ENDS the input-button Styles: */
 
 button {
     width: 180px;
@@ -121,6 +113,9 @@ button i {
     padding-right: 10px;
 }
 
+.button-translate {
+    margin-bottom: 40px;
+}
 
 /* Here starts the toggle switch */
 
@@ -238,10 +233,6 @@ select {
     max-height: 416px;
 }
 
-/* embed {
-    width: auto;
-    height: 100%;
-} */
 
 .picture-container embed {
     display: flex;
@@ -249,6 +240,19 @@ select {
     flex: 100%;
 }
 
+.output-container {
+    width: 310px;
+    min-height: 310px;
+    margin-top: 40px;
+    background-color: #EAEAEC;
+    border: 2px solid #3D5A80;
+    border-radius: 6px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 100%;
+    max-height: 416px;
+}
 
 
 .container-below {
