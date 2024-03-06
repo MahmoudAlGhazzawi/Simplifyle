@@ -90,11 +90,66 @@ h3 {
     margin-right: 10px;
 }
 
+
+
+
+/* Here starts the radix-button*/
+
+/* reset */
 button {
+    all: unset;
+}
+
+.SwitchRoot {
+    width: 42px;
+    height: 25px;
+    background-color: #EE6C4D;
+    border-radius: 9999px;
+    position: relative;
+    -webkit-tap-highlight-color: #293241;
+}
+
+.SwitchRoot:focus {
+    box-shadow: 0 0 0 2px #293241;
+}
+
+.SwitchRoot[data-state='checked'] {
+    background-color: #3D5A80;
+}
+
+.SwitchThumb {
+    display: block;
+    width: 21px;
+    height: 21px;
+    background-color: white;
+    border-radius: 9999px;
+    transition: transform 100ms;
+    transform: translateX(2px);
+    will-change: transform;
+}
+
+.SwitchThumb[data-state='checked'] {
+    transform: translateX(19px);
+}
+
+.Switch-Label {
+    font-family: "Barlow", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #3D5A80;
+    font-size: 15px;
+    line-height: 1;
+    padding-right: 15px;
+}
+
+/* Here ends the radix-button*/
+
+.real-button {
     width: 180px;
     height: 46px;
     border: 0;
     border-radius: 6px;
+    margin-bottom: 40px;
     display: block;
     margin: auto;
     margin-top: 40px;
@@ -113,66 +168,6 @@ button i {
     padding-right: 10px;
 }
 
-.button-translate {
-    margin-bottom: 40px;
-}
-
-/* Here starts the toggle switch */
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 45px;
-    height: 22px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #EE6C4D;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 22px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 2px;
-    bottom: 2px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%;
-}
-
-input:checked+.slider {
-    background-color: #3D5A80;
-}
-
-input:focus+.slider {
-    box-shadow: 0 0 1px #3D5A80;
-}
-
-input:checked+.slider:before {
-    -webkit-transform: translateX(23px);
-    -ms-transform: translateX(23px);
-    transform: translateX(23px);
-}
-
-/* Here ends the toggle switch */
 
 select {
     width: 270px;
@@ -221,7 +216,7 @@ select {
 
 .picture-container {
     width: 310px;
-    min-height: 310px;
+    min-height: 0px;
     margin-top: 40px;
     background-color: #EAEAEC;
     border: 2px solid #3D5A80;
@@ -235,6 +230,7 @@ select {
 
 
 .picture-container embed {
+    min-height: 440px;
     display: flex;
     flex-direction: column;
     flex: 100%;

@@ -18,11 +18,11 @@ const Output = () => {
                 { }
             </div>
 
-            <button className="button">
+            <button className="real-button">
                 <i class="bi bi-copy"></i>Copy text
             </button>
 
-            <button className="button">
+            <button className="real-button">
                 <i class="bi bi-download"></i>Download pdf
             </button>
 

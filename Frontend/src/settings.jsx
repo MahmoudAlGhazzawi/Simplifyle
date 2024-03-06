@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles.css';
-import find from 'lang-codes'
+import find from 'lang-codes';
+import * as Switch from '@radix-ui/react-switch';
 
 const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf }) => {
 
@@ -10,7 +11,10 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         setIsChecked(!isChecked);
     };
 
+
+
     const [selectedLanguage, setSelectedLanguage] = React.useState("");
+
 
     const handleLanguageChange = (event) => {
         setSelectedLanguage(event.target.value);
@@ -29,10 +33,12 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
                 {selectedPdf && <embed src={`${selectedPdf} #toolbar=0`} type="application/pdf" alt="Upload" />}
             </div>
 
+
             <div className="container-below">
                 <span className="page-counter">Page1/1</span>
                 <span className="redo" onClick={handleRedoUpload}><i className="bi bi-trash"></i>Redo upload</span>
             </div>
+
 
             <div className="select-container">
                 <p><i className="bi bi-globe"></i></p>
@@ -44,15 +50,19 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
                 </select>
             </div>
 
-            <div className="toggle-container" onClick={handleToggle} >
-                <p>Simplify language</p>
-                <label htmlFor="toggle-switch" className="switch">
-                    <input type="checkbox" id="toggle-switch" checked={isChecked} onChange={() => { }} />
-                    <span className="slider"></span>
+
+            <div style={{ display: 'flex', alignItems: 'center' }} >
+                <label className="Switch-Label" htmlFor="simplify-toggle" >
+                    Simplify language
                 </label>
+                <Switch.Root className="SwitchRoot" id="simplify-toggle" checked={isChecked} onClick={handleToggle}>
+                    <Switch.Thumb className="SwitchThumb" />
+                </Switch.Root>
             </div>
 
-            <button className="button-translate"><i className="bi bi-caret-right-square"></i>Translate</button>
+
+            <button className="real-button"><i className="bi bi-caret-right-square"></i>Translate</button>
+
         </div>
     );
 }
