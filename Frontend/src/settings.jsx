@@ -44,7 +44,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         fetch('http://localhost:3000/extractTextFromImage', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'multipart/form-data'
             },
             body: jsonData
         })
