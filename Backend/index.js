@@ -58,6 +58,8 @@ app.get('/', (req, res) => {
 app.post('/extractTextFromImage',  upload.single('file'), async (req, res) => {
     const {language, simplify} = await req.body;
 
+    console.log(req.file);
+
     // read text from image
     const text = await tesseractConverter(req.file.path);
 

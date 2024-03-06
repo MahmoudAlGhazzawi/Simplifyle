@@ -45,9 +45,6 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         // Send the JSON data to the API endpoint 
         fetch('http://localhost:3000/extractTextFromImage', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
             body: body
         })
             .then(response => {
