@@ -51,6 +51,27 @@ app.get('/', (req, res) => {
 })
 
 app.post('/extractTextFromImage',  upload.single('file'), async (req, res) => {
+    const {file, language, simplify} = await req.body;
+
+    const text = await tesseractConverter(req.file.path);
+
+    // delete File after processing it
+    fs.unlink(req.file.path, (err) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        // else File is removed
+      }) 
+
+    // openAI Teil
+    //const lang = 'einfache Deutsch'
+    var uebersetzterText = await translateInput(text, language, true);
+
+    res.render('index', {data:uebersetzterText})
+
+
+    /*
     //console.log(req.file.path); 
     const text = await tesseractConverter(req.file.path);
 
@@ -64,10 +85,11 @@ app.post('/extractTextFromImage',  upload.single('file'), async (req, res) => {
       }) 
 
     // openAI Teil
-    const lang = 'Russisch'
+    const lang = 'einfache Deutsch'
     var uebersetzterText = await translateInput(text, lang);
 
     res.render('index', {data:uebersetzterText})
+    */
 })
 
 app.listen(3000, () => {
@@ -75,7 +97,7 @@ app.listen(3000, () => {
 })
 
 const tesseractConverter  = async (image) => {
-  const worker = await tesseract.createWorker('eng');
+  const worker = await tesseract.createWorker('deu');
   const ret = await worker.recognize(image);
   const text = ret.data.text;
   //console.log(text);
@@ -83,11 +105,15 @@ const tesseractConverter  = async (image) => {
   return text;
 };
 
-async function translateInput(text, lang) {
+async function translateInput(text, lang, simplify) {
+    if(simplify === true){
+      lang = `einfaches ${lang}`
+    }
+
     const completion = await openai.chat.completions.create({
       messages: [
-        {"role": "system", "content": `Du übersetzt bürokratische briefe auf eine beiliebe Sprache, was der User dir schreiben wird.
-        Es sllen keine Daten wie (Absender, Empänger, Fußzeile) übersetzt werden sondern nur die Ihalt und Betreff.`},
+        {"role": "system", "content": `Du übersetzt bürokratische briefe auf eine beliebige Sprache, was der User dir schreiben wird.
+        Es sollen keine Daten wie (Absender, Empänger, Fußzeile) übersetzt werden sondern nur der Inhalt und Betreff.`},
         { "role": "user", "content": `Übersetzte mir diesen Brief auf ${lang}:
                                       ${text}`}],
       model: "gpt-3.5-turbo",
