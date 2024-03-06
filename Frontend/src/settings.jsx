@@ -37,8 +37,10 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         };
 
         // Convert the JSON object to a string
-        const jsonData = JSON.stringify(translationData);
-        console.log(jsonData);
+        const body = new FormData()
+        body.append('file', translationData.file)
+        body.append('language', translationData.language)
+        body.append('simplify', translationData.simplify)
 
         // Send the JSON data to the API endpoint 
         fetch('http://localhost:3000/extractTextFromImage', {
@@ -46,7 +48,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
             headers: {
                 'Content-Type': 'multipart/form-data'
             },
-            body: jsonData
+            body: body
         })
             .then(response => {
                 if (!response.ok) {
