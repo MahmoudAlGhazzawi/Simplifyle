@@ -46,13 +46,17 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage});
 
 
+// Nur für Testseite
 app.get('/', (req, res) => {
     res.render('index', {data:''}); 
 })
 
+
+
 app.post('/extractTextFromImage',  upload.single('file'), async (req, res) => {
-    const {file, language, simplify} = await req.body;
+    const {language, simplify} = await req.body;
 
+    // read text from image
     const text = await tesseractConverter(req.file.path);
 
     // delete File after processing it
@@ -65,31 +69,9 @@ app.post('/extractTextFromImage',  upload.single('file'), async (req, res) => {
       }) 
 
     // openAI Teil
-    //const lang = 'einfache Deutsch'
-    var uebersetzterText = await translateInput(text, language, true);
+    var uebersetzterText = await translateInput(text, language, simplify);
 
-    res.render('index', {data:uebersetzterText})
-
-
-    /*
-    //console.log(req.file.path); 
-    const text = await tesseractConverter(req.file.path);
-
-    // delete File after processing it
-    fs.unlink(req.file.path, (err) => {
-        if (err) {
-          console.error(err)
-          return
-        }
-        // else File is removed
-      }) 
-
-    // openAI Teil
-    const lang = 'einfache Deutsch'
-    var uebersetzterText = await translateInput(text, lang);
-
-    res.render('index', {data:uebersetzterText})
-    */
+    res.json({"text":uebersetzterText});
 })
 
 app.listen(3000, () => {
@@ -106,7 +88,7 @@ const tesseractConverter  = async (image) => {
 };
 
 async function translateInput(text, lang, simplify) {
-    if(simplify === true){
+    if(simplify === 'true'){
       lang = `einfaches ${lang}`
     }
 
