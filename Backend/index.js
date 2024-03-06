@@ -4,9 +4,11 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const app = express();
+const cors = require('cors'); // ****WICHTIG**** Zugang zu API eingrezen
 const OpenAI = require('openai');
 require('dotenv').config();
 
+app.use(cors());
 
 
 const openAIApiKey = process.env.OPENAI_API_KEY;
