@@ -3,7 +3,7 @@ import './styles.css';
 import find from 'lang-codes';
 import * as Switch from '@radix-ui/react-switch';
 
-const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf }) => {
+const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, onTranslateClick, onRedoClick }) => {
 
     const [isChecked, setIsChecked] = React.useState(true);
 
@@ -25,6 +25,48 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         setSelectedPdf(null);
     };
 
+
+    // API start: 
+
+    const handleTranslate = () => {
+        // Create a JSON object with the selected file, language, and simplify option
+        const translationData = {
+            file: selectedImage || selectedPdf,
+            language: selectedLanguage,
+            simplify: isChecked
+        };
+
+        // Convert the JSON object to a string
+        const jsonData = JSON.stringify(translationData);
+        console.log(jsonData);
+
+        // Send the JSON data to the API endpoint 
+        fetch('http://localhost:3000/extractTextFromImage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Translation successful:', data);
+            })
+            .catch(error => {
+                console.error('Error during translation:', error);
+            });
+    };
+
+    // API end: 
+
+
+
+
     return (
         <div className="container">
 
@@ -36,7 +78,10 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
 
             <div className="container-below">
                 <span className="page-counter">Page1/1</span>
-                <span className="redo" onClick={handleRedoUpload}><i className="bi bi-trash"></i>Redo upload</span>
+                <span className="redo" onClick={() => {
+                    handleRedoUpload();
+                    onRedoClick();
+                }} ><i className="bi bi-trash"></i>Redo upload</span>
             </div>
 
 
@@ -61,9 +106,14 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
             </div>
 
 
-            <button className="real-button"><i className="bi bi-caret-right-square"></i>Translate</button>
+            <button className="real-button" onClick={() => {
+                handleTranslate();
+                onTranslateClick();
+            }} ><i className="bi bi-caret-right-square"></i>Translate</button>
 
-        </div>
+            <div className="padding-container"></div>
+
+        </div >
     );
 }
 

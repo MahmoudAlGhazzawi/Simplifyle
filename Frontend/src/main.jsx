@@ -9,22 +9,39 @@ import Output from './output.jsx'
 const App = () => {
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [selectedPdf, setSelectedPdf] = React.useState(null);
+  const [currentStep, setCurrentStep] = React.useState('Start');
 
   const handleImageSelect = (imageData) => {
     setSelectedImage(imageData);
+    setCurrentStep('Settings');
   };
 
   const handlePdfSelect = (pdfData) => {
     setSelectedPdf(pdfData);
+    setCurrentStep('Settings');
   };
+
 
   return (
     <React.StrictMode>
       <Header />
-      {/* <Start /> */}
-      <Input onImageSelect={handleImageSelect} onPdfSelect={handlePdfSelect} />
-      <Settings selectedImage={selectedImage} setSelectedImage={setSelectedImage} selectedPdf={selectedPdf} setSelectedPdf={setSelectedPdf} />
-      {/* <Output /> */}
+
+      {currentStep === 'Start' && <Start onStartClick={() => setCurrentStep('Input')} />}
+
+      {currentStep === 'Input' && <Input onImageSelect={handleImageSelect} onPdfSelect={handlePdfSelect} />}
+
+      {currentStep === 'Settings' && <Settings onTranslateClick={() => setCurrentStep('Output')} onRedoClick={() => setCurrentStep('Input')}
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+        selectedPdf={selectedPdf}
+        setSelectedPdf={setSelectedPdf} />}
+
+      {currentStep === 'Output' && <Output onMoreClick={() => setCurrentStep('Input')}
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+        selectedPdf={selectedPdf}
+        setSelectedPdf={setSelectedPdf} />}
+
     </React.StrictMode>
   );
 };

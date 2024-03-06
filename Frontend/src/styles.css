@@ -5,6 +5,7 @@ body {
 }
 
 .main-header {
+    position: fixed;
     background-color: #EE6C4D;
     width: 100%;
     height: 120px;
@@ -14,7 +15,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
+
 
 .main-header img {
     width: 60%;
@@ -22,6 +25,7 @@ body {
 }
 
 .container {
+    padding-top: 120px;
     margin: 0 auto;
     width: 80%;
     text-align: center;
@@ -158,7 +162,9 @@ button {
     font-size: 16px;
     color: #fff;
     background-color: #3D5A80;
+    cursor: pointer;
 }
+
 
 button:nth-of-type(2) {
     margin-top: 30px;
@@ -167,6 +173,7 @@ button:nth-of-type(2) {
 button i {
     padding-right: 10px;
 }
+
 
 
 select {
@@ -274,4 +281,21 @@ select {
 
 .redo i {
     padding-right: 5px;
+}
+
+.more-container {
+    font-size: 14px;
+    font-weight: 500;
+    color: #3D5A80;
+    padding-top: 25px;
+    padding-bottom: 40px;
+    cursor: pointer;
+}
+
+.more-container i {
+    padding-right: 5px;
+}
+
+.padding-container {
+    height: 40px;
 }

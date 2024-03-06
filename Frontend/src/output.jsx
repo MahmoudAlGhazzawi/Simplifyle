@@ -4,7 +4,12 @@ import './styles.css'
 
 
 
-const Output = () => {
+const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, onMoreClick }) => {
+
+    const handleRedoUpload = () => {
+        setSelectedImage(null);
+        setSelectedPdf(null);
+    };
 
     return (
 
@@ -19,15 +24,18 @@ const Output = () => {
             </div>
 
             <button className="real-button">
-                <i class="bi bi-copy"></i>Copy text
+                <i className="bi bi-copy"></i>Copy text
             </button>
 
             <button className="real-button">
-                <i class="bi bi-download"></i>Download pdf
+                <i className="bi bi-download"></i>Download pdf
             </button>
 
-            <p><i class="bi bi-arrow-clockwise"></i>Translate more documents</p>
-
+            <div className="more-container" onClick={() => {
+                handleRedoUpload();
+                onMoreClick();
+            }} > <span ><i className="bi bi-arrow-clockwise"></i>Translate more documents</span>
+            </div>
         </div>
     );
 };
