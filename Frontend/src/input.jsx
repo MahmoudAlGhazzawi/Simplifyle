@@ -12,12 +12,11 @@ const Input = ({ onImageSelect, onPdfSelect }) => {
 
         reader.onload = (e) => {
 
-            // soll noch fixiert um Vorschau zu korrigieren
             const result = e.target.result;
             if (file.type.includes('image')) {
-                onImageSelect({file, result});
+                onImageSelect({ file, result });
             } else {
-                onPdfSelect({file, result});
+                onPdfSelect({ file, result });
             }
         };
         reader.readAsDataURL(file);

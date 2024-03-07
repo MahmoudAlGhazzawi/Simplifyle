@@ -6,24 +6,24 @@ import * as Switch from '@radix-ui/react-switch';
 const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, onTranslateClick, onRedoClick }) => {
 
     const [isChecked, setIsChecked] = React.useState(true);
+    const [selectedLanguage, setSelectedLanguage] = React.useState("");
+    const [isLanguageSelected, setIsLanguageSelected] = React.useState(false);
 
     const handleToggle = () => {
         setIsChecked(!isChecked);
     };
 
 
-
-    const [selectedLanguage, setSelectedLanguage] = React.useState("");
-
-
     const handleLanguageChange = (event) => {
         setSelectedLanguage(event.target.value);
+        setIsLanguageSelected(event.target.value !== "");
     };
 
     const handleRedoUpload = () => {
         setSelectedImage(null);
         setSelectedPdf(null);
     };
+
 
 
     // API start: 
@@ -41,6 +41,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         body.append('file', translationData.file)
         body.append('language', translationData.language)
         body.append('simplify', translationData.simplify)
+
 
         // Send the JSON data to the API endpoint 
         fetch('http://localhost:3000/extractTextFromImage', {
@@ -70,8 +71,8 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         <div className="container">
 
             <div className="picture-container">
-                {selectedImage && <img src={selectedImage} alt="Selected" />}
-                {selectedPdf && <embed src={`${selectedPdf} #toolbar=0`} type="application/pdf" alt="Upload" />}
+                {selectedImage && <img src={selectedImage.result} alt="Image" />}
+                {selectedPdf && <embed src={`${selectedPdf.result} #toolbar=0`} type="application/pdf" alt="Upload" />}
             </div>
 
 
@@ -84,10 +85,10 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
             </div>
 
 
-            <div className="select-container">
+            <div className="select-container" >
                 <p><i className="bi bi-globe"></i></p>
-                <select name="languages" id="languages" value={selectedLanguage} onChange={handleLanguageChange}>
-                    <option value="">Choose a language</option>
+                <select name="languages" id="languages" value={selectedLanguage} onChange={handleLanguageChange} >
+                    <option value="" >Choose a language (required)</option>
                     {find().map((obj) => {
                         return <option value={obj.name} key={obj.name} >{obj.name}</option>
                     })}
@@ -105,7 +106,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
             </div>
 
 
-            <button className="real-button" onClick={() => {
+            <button className="real-button" disabled={!isLanguageSelected} onClick={() => {
                 handleTranslate();
                 onTranslateClick();
             }} ><i className="bi bi-caret-right-square"></i>Translate</button>
