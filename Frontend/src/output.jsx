@@ -6,10 +6,24 @@ import './styles.css'
 
 const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, onMoreClick }) => {
 
+    const [translatedText, setTranslatedText] = React.useState('');
+
     const handleRedoUpload = () => {
         setSelectedImage(null);
         setSelectedPdf(null);
     };
+
+    React.useEffect(() => {
+        // Fetch translated text from backend and update state
+        fetch('http://localhost:3000/extractTextFromImage')
+            .then(response => response.json())
+            .then(data => {
+                setTranslatedText(data.text);
+            })
+            .catch(error => {
+                console.error('Error fetching translated text:', error);
+            });
+    }, []); // Run this effect only once, on component mount
 
     return (
 
@@ -20,7 +34,7 @@ const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, 
             <h3>Copy the text to your clipboard or download pdf file</h3>
 
             <div className="output-container">
-                { }
+                {translatedText && <p>{translatedText}</p>}
             </div>
 
             <button className="real-button">

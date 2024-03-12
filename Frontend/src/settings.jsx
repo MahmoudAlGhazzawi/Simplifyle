@@ -42,6 +42,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         body.append('language', translationData.language)
         body.append('simplify', translationData.simplify)
 
+        console.log(translationData);
 
         // Send the JSON data to the API endpoint 
         fetch('http://localhost:3000/extractTextFromImage', {
