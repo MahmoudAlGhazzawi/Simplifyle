@@ -58,24 +58,23 @@ app.get('/', (req, res) => {
 app.post('/extractTextFromImage',  upload.single('file'), async (req, res) => {
     const {language, simplify} = await req.body;
 
-    console.log(req.file);
-
     // read text from image
     const text = await tesseractConverter(req.file.path);
-
-    // delete File after processing it
-    fs.unlink(req.file.path, (err) => {
-        if (err) {
-          console.error(err)
-          return
-        }
-        // else File is removed
-      }) 
 
     // openAI Teil
     var uebersetzterText = await translateInput(text, language, simplify);
 
     res.json({"text":uebersetzterText});
+
+    // delete File after processing it
+    fs.unlink(req.file.path, (err) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      // else File is removed
+    }) 
+    
 })
 
 app.listen(3000, () => {

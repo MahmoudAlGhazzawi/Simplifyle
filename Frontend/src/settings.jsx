@@ -31,7 +31,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
     const handleTranslate = () => {
         // Create a JSON object with the selected file, language, and simplify option
         const translationData = {
-            file: selectedImage || selectedPdf,
+            file: selectedImage.file || selectedPdf.file,
             language: selectedLanguage,
             simplify: isChecked
         };
