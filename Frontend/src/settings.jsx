@@ -3,7 +3,7 @@ import './styles.css';
 import find from 'lang-codes';
 import * as Switch from '@radix-ui/react-switch';
 
-const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, onTranslateClick, onRedoClick }) => {
+const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, onTranslateClick, onRedoClick, setTranslatedText }) => {
 
     const [isChecked, setIsChecked] = React.useState(true);
     const [selectedLanguage, setSelectedLanguage] = React.useState("");
@@ -42,8 +42,6 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         body.append('language', translationData.language)
         body.append('simplify', translationData.simplify)
 
-        console.log(translationData);
-
         // Send the JSON data to the API endpoint 
         fetch('http://localhost:3000/extractTextFromImage', {
             method: 'POST',
@@ -56,6 +54,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
                 return response.json();
             })
             .then(data => {
+                setTranslatedText(data.text);
                 console.log('Translation successful:', data);
             })
             .catch(error => {

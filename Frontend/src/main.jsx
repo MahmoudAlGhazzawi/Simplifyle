@@ -10,6 +10,7 @@ const App = () => {
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [selectedPdf, setSelectedPdf] = React.useState(null);
   const [currentStep, setCurrentStep] = React.useState('Start');
+  const [translatedText, setTranslatedText] = React.useState('');
 
   const handleImageSelect = (imageData) => {
     setSelectedImage(imageData);
@@ -34,13 +35,15 @@ const App = () => {
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
         selectedPdf={selectedPdf}
-        setSelectedPdf={setSelectedPdf} />}
+        setSelectedPdf={setSelectedPdf} 
+        setTranslatedText={setTranslatedText}/>}
 
       {currentStep === 'Output' && <Output onMoreClick={() => setCurrentStep('Input')}
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
         selectedPdf={selectedPdf}
-        setSelectedPdf={setSelectedPdf} />}
+        setSelectedPdf={setSelectedPdf}
+        translatedText={translatedText} />}
 
     </React.StrictMode>
   );
