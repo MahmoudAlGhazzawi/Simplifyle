@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@radix-ui/react-switch": "^1.0.3",
+    "@react-pdf/renderer": "^3.3.8",
+    "html2canvas": "^1.4.1",
+    "html2pdf": "^0.0.11",
+    "jspdf": "^2.5.1",
     "lang-codes": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

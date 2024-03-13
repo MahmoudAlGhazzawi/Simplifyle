@@ -1,4 +1,8 @@
 import React from 'react'
+// import jsPDF from "jspdf";
+// import html2canvas from 'html2canvas';
+import ReactPDF from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import ReactDOM from 'react-dom/client'
 import './styles.css'
 
@@ -7,6 +11,7 @@ import './styles.css'
 const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, onMoreClick }) => {
 
     const [translatedText, setTranslatedText] = React.useState('');
+
 
     const handleRedoUpload = () => {
         setSelectedImage(null);
@@ -25,6 +30,25 @@ const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, 
             });
     }, []); // Run this effect only once, on component mount
 
+
+    const handleDownloadPdf = () => {
+
+        const pdfContent = (
+            <Document>
+                <Page size="A4">
+                    <View>
+                        <Text>{translatedText}</Text>
+                    </View>
+                </Page>
+            </Document>
+        );
+
+        ReactPDF.render(pdfContent);
+
+    };
+
+
+
     return (
 
         <div className="container">
@@ -34,6 +58,8 @@ const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, 
             <h3>Copy the text to your clipboard or download pdf file</h3>
 
             <div className="output-container">
+                <p>A string containing one or more selectors to match against. This string must be a valid CSS selector string; if it's not, a SyntaxError exception is thrown. See Locating DOM elements using selectors for more information about using selectors to identify elements. Multiple selectors may be specified by separating them using commas.
+                </p>
                 {translatedText && <p>{translatedText}</p>}
             </div>
 
@@ -41,7 +67,7 @@ const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, 
                 <i className="bi bi-copy"></i>Copy text
             </button>
 
-            <button className="real-button">
+            <button className="real-button" onClick={handleDownloadPdf} >
                 <i className="bi bi-download"></i>Download pdf
             </button>
 

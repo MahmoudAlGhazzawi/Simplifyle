@@ -257,6 +257,11 @@ select {
     max-height: 416px;
 }
 
+.output-container p {
+    text-align: left;
+    padding: 0px 20px;
+}
+
 
 .container-below {
     width: 310px;
