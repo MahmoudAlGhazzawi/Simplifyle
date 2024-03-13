@@ -37,7 +37,7 @@ const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, 
                 {translatedText && <p>{translatedText}</p>}
             </div>
 
-            <button className="real-button">
+            <button className="real-button" onClick={() => navigator.clipboard.writeText(translatedText)}>
                 <i className="bi bi-copy"></i>Copy text
             </button>
 
