@@ -1,8 +1,5 @@
 import React from 'react'
-// import jsPDF from "jspdf";
-// import html2canvas from 'html2canvas';
-import ReactPDF from '@react-pdf/renderer';
-import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import BounceLoader from "react-spinners/BounceLoader";
 import ReactDOM from 'react-dom/client'
 import './styles.css'
 
@@ -10,28 +7,25 @@ import './styles.css'
 
 const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, onMoreClick, translatedText, setTranslatedText }) => {
 
+    const [isTranslating, setIsTranslating] = React.useState(!translatedText);
+    const [copied, setCopied] = React.useState(false);
+
     const handleRedoUpload = () => {
         setSelectedImage(null);
         setSelectedPdf(null);
+        setTranslatedText(null);
+        setCopied(false)
     };
 
-    const handleDownloadPdf = () => {
-
-        const pdfContent = (
-            <Document>
-                <Page size="A4">
-                    <View>
-                        <Text>{translatedText}</Text>
-                    </View>
-                </Page>
-            </Document>
-        );
-
-        ReactPDF.render(pdfContent);
-
+    const handleCopyText = () => {
+        navigator.clipboard.writeText(translatedText);
+        setCopied(true);
     };
 
-
+    React.useEffect(() => {
+        // Update isTranslating state when translatedText changes
+        setIsTranslating(!translatedText);
+    }, [translatedText]);
 
     return (
 
@@ -42,15 +36,16 @@ const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, 
             <h3>Copy the text to your clipboard or download pdf file</h3>
 
             <div className="output-container">
-                {translatedText && <p>{translatedText}</p>}
+                {isTranslating ? (<div><BounceLoader color={"#EE6C4D"} /></div>) :
+                    (<p>{translatedText}</p>)}
             </div>
 
-            <button className="real-button" onClick={() => navigator.clipboard.writeText(translatedText)}>
-                <i className="bi bi-copy"></i>Copy text
-            </button>
-
-            <button className="real-button" onClick={handleDownloadPdf} >
-                <i className="bi bi-download"></i>Download pdf
+            <button className="real-button" onClick={handleCopyText} disabled={copied}>
+                {copied ? (
+                    <> <i className="bi bi-check-circle-fill"></i>Copied </>
+                ) : (
+                    <> <i className="bi bi-copy"></i>Copy text </>
+                )}
             </button>
 
             <div className="more-container" onClick={() => {

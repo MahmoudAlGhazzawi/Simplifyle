@@ -77,7 +77,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
 
 
             <div className="container-below">
-                <span className="page-counter">Page1/1</span>
+                {/* <span className="page-counter">Page1/1</span> */}
                 <span className="redo" onClick={() => {
                     handleRedoUpload();
                     onRedoClick();

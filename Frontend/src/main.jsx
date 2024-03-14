@@ -35,18 +35,22 @@ const App = () => {
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
         selectedPdf={selectedPdf}
-        setSelectedPdf={setSelectedPdf} 
-        setTranslatedText={setTranslatedText}/>}
+        setSelectedPdf={setSelectedPdf}
+        setTranslatedText={setTranslatedText} />}
 
       {currentStep === 'Output' && <Output onMoreClick={() => setCurrentStep('Input')}
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
         selectedPdf={selectedPdf}
         setSelectedPdf={setSelectedPdf}
-        translatedText={translatedText} />}
+        translatedText={translatedText}
+        setTranslatedText={setTranslatedText} />}
 
     </React.StrictMode>
   );
 };
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+// ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
