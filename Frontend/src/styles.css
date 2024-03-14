@@ -320,6 +320,14 @@ select {
     cursor: pointer;
 }
 
+.more-container:hover {
+    color: #293241;
+}
+
+.more-container:active {
+    color: #3D5A80;
+}
+
 .more-container i {
     padding-right: 5px;
 }

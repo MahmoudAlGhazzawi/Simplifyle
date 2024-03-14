@@ -40,13 +40,15 @@ const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, 
                     (<p>{translatedText}</p>)}
             </div>
 
-            <button className="real-button" onClick={handleCopyText} disabled={copied}>
-                {copied ? (
-                    <> <i className="bi bi-check-circle-fill"></i>Copied </>
-                ) : (
-                    <> <i className="bi bi-copy"></i>Copy text </>
-                )}
-            </button>
+            {translatedText && (
+                <button className="real-button" onClick={handleCopyText} disabled={copied}>
+                    {copied ? (
+                        <> <i className="bi bi-check-circle-fill"></i>Copied </>
+                    ) : (
+                        <> <i className="bi bi-copy"></i>Copy text </>
+                    )}
+                </button>
+            )}
 
             <div className="more-container" onClick={() => {
                 handleRedoUpload();
