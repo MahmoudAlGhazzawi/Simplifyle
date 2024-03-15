@@ -37,7 +37,8 @@ const Input = ({ onImageSelect, onPdfSelect }) => {
 
             <label htmlFor="upload-button" className="input-button-label">
                 <i className="bi bi-upload"></i>Upload file
-                <input className="input-button" type="file" accept="image/*, application/pdf" id="upload-button" onChange={handleImageChange} />
+                <input className="input-button" type="file" accept="image/*" id="upload-button" onChange={handleImageChange} />
+                {/* <input className="input-button" type="file" accept="image/*, application/pdf" id="upload-button" onChange={handleImageChange} /> */}
             </label>
 
 
