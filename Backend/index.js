@@ -77,8 +77,8 @@ app.post('/extractTextFromImage',  upload.single('file'), async (req, res) => {
     
 })
 
-app.listen(3000, () => {
-    console.log('ON PORT 3000')
+app.listen(process.env.PORT, () => {
+    console.log(`ON PORT ${process.env.PORT}`)
 })
 
 const tesseractConverter  = async (image) => {
