@@ -51,6 +51,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
+                console.log(response.body);
                 return response.json();
             })
             .then(data => {
