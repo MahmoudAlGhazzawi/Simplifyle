@@ -43,7 +43,7 @@ const Settings = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf
         body.append('simplify', translationData.simplify)
 
         // Send the JSON data to the API endpoint 
-        fetch(`${process.env.URL}/extractTextFromImage`, {
+        fetch(`${process.env.VITE_URL}/extractTextFromImage`, {
             method: 'POST',
             body: body
         })
