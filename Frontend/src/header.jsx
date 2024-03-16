@@ -7,7 +7,7 @@ import './styles.css'
 const Header = () => {
     return (
         <div className="main-header">
-            <img src="/src/assets/simplifyle_logo.png" alt="Simplifyle Logo" />
+            <img src="/simplifyle_logo.png" alt="Simplifyle Logo" />
         </div>
     );
 }

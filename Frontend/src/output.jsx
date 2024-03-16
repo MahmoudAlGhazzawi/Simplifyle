@@ -33,7 +33,7 @@ const Output = ({ selectedImage, setSelectedImage, selectedPdf, setSelectedPdf, 
 
             <h1>Success!</h1>
             <h2>Your file has been translated</h2>
-            <h3>Copy the text to your clipboard or download pdf file</h3>
+            <h3>Copy the text to your clipboard</h3>
 
             <div className="output-container">
                 {isTranslating ? (<div><BounceLoader color={"#EE6C4D"} /></div>) :
